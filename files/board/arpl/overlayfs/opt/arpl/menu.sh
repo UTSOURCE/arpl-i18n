@@ -13,7 +13,7 @@ if [ `cat /sys/block/${LOADER_DEVICE_NAME}/${LOADER_DEVICE_NAME}3/size` -lt 4194
 fi
 
 # Get actual IP
-IP=`ip route get 1.1.1.1 2>/dev/null | awk '{print$7}'`
+IP=`ip route 2>/dev/null | sed -n 's/.* via .* src \(.*\) metric .*/\1/p' | head -1` # `ip route get 1.1.1.1 2>/dev/null | awk '{print$7}'`
 
 # Dirty flag
 DIRTY=0
